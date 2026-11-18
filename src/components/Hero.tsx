@@ -22,16 +22,14 @@ export function Hero() {
             HARMONIZAÇÃO FACIAL · ABORDAGEM NATURAL
           </motion.p>
           <h1 aria-label="Beleza que respeita a sua essência">
-            <motion.span className="headline-line line-one" initial={reduceMotion ? false : { opacity: 0, y: 34 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: reduceMotion ? 0 : 0.9, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}>Beleza que</motion.span>
-            <motion.span className="headline-line line-two" initial={reduceMotion ? false : { opacity: 0, y: 34 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: reduceMotion ? 0 : 0.9, delay: 0.34, ease: [0.22, 1, 0.36, 1] }}>respeita</motion.span>
-            <motion.span className="headline-line line-three" initial={reduceMotion ? false : { opacity: 0, y: 34 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: reduceMotion ? 0 : 0.9, delay: 0.48, ease: [0.22, 1, 0.36, 1] }}>sua essência<span className="period">.</span></motion.span>
+            <motion.span className="headline-line line-one" initial={reduceMotion ? false : { opacity: 0, y: 34 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: reduceMotion ? 0 : 0.9, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}><span className="headline-part part-left">Beleza</span><span className="headline-part part-right">que</span></motion.span>
+            <motion.span className="headline-line line-two" initial={reduceMotion ? false : { opacity: 0, y: 34 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: reduceMotion ? 0 : 0.9, delay: 0.34, ease: [0.22, 1, 0.36, 1] }}><span className="headline-part part-left">res</span><span className="headline-part part-right">peita</span></motion.span>
+            <motion.span className="headline-line line-three" initial={reduceMotion ? false : { opacity: 0, y: 34 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: reduceMotion ? 0 : 0.9, delay: 0.48, ease: [0.22, 1, 0.36, 1] }}><span className="headline-part part-left">sua</span><span className="headline-part part-right">essência<span className="period">.</span></span></motion.span>
           </h1>
         </motion.div>
 
-        <motion.div className="portrait-frame" style={reduceMotion ? undefined : { y: imageY, scale: imageScale }} aria-label="Espaço reservado para fotografia profissional da Dra. Bruna Carra" role="img">
-          <div className="portrait-oval"><span className="portrait-monogram">BC</span></div>
-          <span className="portrait-caption">DRA. BRUNA CARRA<br />BIOMÉDICA</span>
-          <span className="portrait-note">ESPAÇO PARA RETRATO</span>
+        <motion.div className="portrait-frame" style={reduceMotion ? undefined : { y: imageY, scale: imageScale }} aria-label="Retrato profissional da Dra. Bruna Carra" role="img">
+          <img className="portrait-image" src="/img/Mulher%20Sorridente%20com%20Tatuagens%20e%20Look%20Escuro.png" alt="" />
         </motion.div>
 
         <motion.aside className="hero-note" initial={reduceMotion ? false : { opacity: 0, x: 12 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: reduceMotion ? 0 : 0.8, delay: 0.7 }}>
