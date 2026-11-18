@@ -63,8 +63,8 @@ body { overflow-x: hidden; }
 
 .about-section { background: var(--paper); }
 .about-layout { display: grid; grid-template-columns: minmax(280px, .83fr) minmax(0, 1fr); gap: clamp(56px, 9vw, 140px); align-items: center; }
-.about-portrait { position: relative; min-height: 620px; overflow: hidden; background: var(--sand); border-radius: 48% 48% 2px 2px / 32% 32% 2px 2px; }
-.about-portrait img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; object-position: center bottom; }
+.about-portrait { position: relative; min-height: 620px; overflow: hidden; }
+.about-portrait img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; object-position: center bottom; -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 13%, #000 87%, transparent 100%), linear-gradient(to bottom, #000 72%, transparent 100%); -webkit-mask-composite: source-in; mask-image: linear-gradient(to right, transparent 0%, #000 13%, #000 87%, transparent 100%), linear-gradient(to bottom, #000 72%, transparent 100%); mask-composite: intersect; }
 .photo-caption { position: absolute; right: 18px; bottom: 18px; color: var(--ink); font-size: 8px; letter-spacing: .16em; }
 .about-copy { max-width: 550px; }
 .about-copy h2 { margin-bottom: 32px; }
@@ -83,14 +83,15 @@ body { overflow-x: hidden; }
 .results-heading h2 { margin-bottom: 0; }
 .results-intro p { max-width: 385px; margin: 0 0 8px; }
 .comparison-stage { position: relative; display: grid; grid-template-columns: 1fr 1fr; min-height: 480px; background: var(--page-sand); }
-.comparison-panel { position: relative; display: grid; min-height: 480px; overflow: hidden; place-items: center; }
+.comparison-panel { position: relative; display: grid; min-height: 480px; overflow: hidden; place-items: center; outline: none; }
 .comparison-before { background: #e8e9e1; }
 .comparison-after { background: #dce6dd; }
 .comparison-panel + .comparison-panel { border-left: 1px solid rgba(36, 33, 31, .2); }
-.comparison-label { position: absolute; z-index: 2; top: 22px; left: 24px; color: var(--ink); font-size: 8px; letter-spacing: .18em; }
-.comparison-placeholder { display: grid; width: 56%; height: 76%; place-items: center; border: 1px solid rgba(36, 33, 31, .18); border-radius: 48% 48% 2px 2px / 32% 32% 2px 2px; color: rgba(36, 33, 31, .55); font: italic 20px/1.35 'Playfair Display', Georgia, serif; text-align: center; }
-.comparison-after .comparison-placeholder { width: 53%; height: 72%; }
-.comparison-caption { position: absolute; right: 22px; bottom: 18px; left: 22px; display: flex; justify-content: space-between; color: rgba(36, 33, 31, .64); font-size: 7px; letter-spacing: .14em; }
+.comparison-panel::after { position: absolute; inset: 45% 0 0; background: linear-gradient(180deg, transparent 0%, rgba(20, 24, 21, .48) 100%); content: ''; pointer-events: none; }
+.comparison-panel:focus-visible { outline: 2px solid var(--green); outline-offset: -4px; }
+.comparison-label { position: absolute; z-index: 2; bottom: 22px; left: 24px; color: #fff; font-size: 9px; font-weight: 500; letter-spacing: .2em; text-shadow: 0 1px 8px rgba(0, 0, 0, .22); }
+.comparison-photo { width: 100%; height: 100%; object-fit: cover; object-position: center; transition: transform 1.1s cubic-bezier(.2, .7, .2, 1); }
+.comparison-panel:hover .comparison-photo, .comparison-panel:focus .comparison-photo { transform: scale(1.07); }
 .results-note { margin: 18px 0 0; color: var(--page-muted); font-size: 10px; line-height: 1.7; }
 
 .treatments-section { background: var(--page-sand); }
@@ -105,6 +106,8 @@ body { overflow-x: hidden; }
 .treatment-list { display: flex; gap: 16px; overflow-x: auto; padding: 2px 2px 12px; scroll-snap-type: x mandatory; scrollbar-width: none; }
 .treatment-list::-webkit-scrollbar { display: none; }
 .treatment-card { flex: 0 0 calc((100% - 32px) / 3); min-width: 0; overflow: hidden; border-radius: 3px; background: var(--page-paper); box-shadow: 0 8px 24px rgba(25, 60, 44, .07); scroll-snap-align: start; }
+.treatment-card-trigger { display: block; width: 100%; height: 100%; padding: 0; border: 0; background: transparent; color: inherit; cursor: pointer; text-align: left; }
+.treatment-card-trigger:focus-visible { outline: 2px solid var(--green); outline-offset: -3px; }
 .treatment-image { position: relative; height: 190px; overflow: hidden; background: #d9e2da; }
 .treatment-image img { width: 100%; height: 100%; object-fit: cover; object-position: center 38%; transition: transform 500ms ease; }
 .treatment-card:hover .treatment-image img { transform: scale(1.035); }
@@ -114,8 +117,20 @@ body { overflow-x: hidden; }
 .treatment-card-copy { padding: 20px 20px 18px; }
 .treatment-card-copy h3 { margin: 0; color: var(--ink); font: 500 clamp(21px, 2vw, 27px)/1.12 'Playfair Display', Georgia, serif; }
 .treatment-card-copy p { min-height: 62px; margin: 9px 0 16px; color: var(--page-muted); font-size: 11px; line-height: 1.65; }
-.treatment-link { display: flex; justify-content: space-between; align-items: center; gap: 18px; padding-top: 12px; border-top: 1px solid rgba(36, 33, 31, .16); color: var(--green); font-size: 8px; letter-spacing: .08em; }
+.treatment-more { display: flex; justify-content: space-between; align-items: center; gap: 18px; padding-top: 12px; border-top: 1px solid rgba(36, 33, 31, .16); color: var(--green); font-size: 8px; letter-spacing: .08em; }
 .treatments-note { margin: 22px 0 0; color: var(--page-muted); font-size: 9px; line-height: 1.6; }
+
+.treatment-dialog { position: fixed; z-index: 1001; top: 50%; left: 50%; width: min(860px, calc(100% - 36px)); max-width: none; max-height: min(620px, calc(100% - 36px)); margin: 0; padding: 0; overflow: auto; border: 0; background: var(--page-paper); color: var(--ink); box-shadow: 0 24px 80px rgba(0, 0, 0, .24); transform: translate(-50%, -50%); }
+.treatment-dialog::backdrop { background: rgba(17, 27, 21, .62); backdrop-filter: blur(4px); }
+.treatment-dialog-content { position: relative; display: grid; min-height: 420px; grid-template-columns: .9fr 1.1fr; }
+.treatment-dialog-image { width: 100%; height: 100%; min-height: 420px; object-fit: cover; }
+.treatment-dialog-copy { display: flex; flex-direction: column; justify-content: center; padding: clamp(28px, 5vw, 58px); }
+.treatment-dialog-copy h3 { margin: 18px 0 14px; color: var(--ink); font: 500 clamp(30px, 4vw, 46px)/1.08 'Playfair Display', Georgia, serif; }
+.treatment-dialog-copy p { margin: 0; color: var(--page-muted); font-size: 13px; line-height: 1.85; }
+.treatment-dialog-cta { display: inline-flex; align-items: center; justify-content: space-between; gap: 24px; margin-top: 28px; padding: 15px 18px; background: var(--green); color: var(--page-paper); font-size: 10px; letter-spacing: .06em; }
+.treatment-dialog-cta:hover { background: var(--page-dark); }
+.treatment-dialog-close { position: absolute; z-index: 1; top: 14px; right: 14px; display: grid; width: 36px; height: 36px; place-items: center; border: 1px solid rgba(36, 33, 31, .16); border-radius: 50%; background: var(--page-paper); color: var(--ink); cursor: pointer; font-size: 22px; line-height: 1; }
+.treatment-dialog-close:hover { background: var(--page-sand); }
 
 .faq-section { background: var(--paper); }
 .faq-layout { display: grid; grid-template-columns: .78fr 1.22fr; gap: 11%; }
@@ -193,14 +208,19 @@ body { overflow-x: hidden; }
   .results-heading { grid-template-columns: 1fr; gap: 24px; margin-bottom: 34px; }
   .comparison-stage { min-height: 350px; }
   .comparison-panel { min-height: 350px; }
-  .comparison-placeholder { width: 70%; height: 68%; font-size: 15px; }
-  .comparison-after .comparison-placeholder { width: 68%; height: 65%; }
-  .comparison-caption { right: 12px; bottom: 12px; left: 12px; font-size: 6px; letter-spacing: .08em; }
+  .comparison-label { bottom: 16px; left: 14px; font-size: 8px; }
   .treatment-card { flex-basis: min(82%, 340px); }
   .treatment-image { height: 180px; }
   .treatment-card-copy { padding: 18px 18px 16px; }
   .treatment-card-copy h3 { font-size: 24px; }
   .treatment-card-copy p { min-height: 0; }
+  .treatment-dialog { max-height: calc(100% - 28px); overflow-y: auto; }
+  .treatment-dialog-content { grid-template-columns: 1fr; }
+  .treatment-dialog-image { height: 190px; min-height: 0; }
+  .treatment-dialog-copy { padding: 25px 22px 24px; }
+  .treatment-dialog-copy h3 { margin-top: 14px; font-size: 30px; }
+  .treatment-dialog-copy p { font-size: 12px; }
+  .treatment-dialog-cta { margin-top: 20px; }
   .faq-layout { grid-template-columns: 1fr; gap: 38px; }
   .faq-item details summary { min-height: 72px; font-size: 16px; }
   .contact-layout { grid-template-columns: 1fr; gap: 46px; }
@@ -211,6 +231,6 @@ body { overflow-x: hidden; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .mobile-menu-toggle span, .treatment-image img, .treatments-arrow, .contact-cta { transition-duration: .01ms !important; }
+  .mobile-menu-toggle span, .treatment-image img, .comparison-photo, .treatments-arrow, .contact-cta { transition-duration: .01ms !important; }
 }
 .mobile-appointment { display: none; }
