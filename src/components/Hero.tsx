@@ -1,5 +1,6 @@
 import { motion, useReducedMotion, useScroll, useTransform } from 'motion/react';
 import { useRef } from 'react';
+import { whatsappLink } from '../siteConfig';
 
 const entranceEase = [0.22, 1, 0.36, 1] as const;
 
@@ -43,7 +44,7 @@ export function Hero() {
           animate={{ x: 0 }}
           transition={revealTransition(0.08)}
         >
-          <span>01 / 02</span><i /> UMA BELEZA SÓ SUA
+          <span>01 — ESSÊNCIA</span><i /> UMA BELEZA SÓ SUA
         </motion.div>
 
         <motion.div
@@ -102,7 +103,7 @@ export function Hero() {
           transition={revealTransition(0.72)}
         >
           <p>HARMONIZAÇÃO COM NATURALIDADE<br />E RESPEITO À SUA IDENTIDADE.</p>
-          <a href="https://wa.me/" className="primary-cta">Vamos conversar <span aria-hidden="true">↗</span></a>
+          <a href={whatsappLink('agendamento de uma avaliação')} className="primary-cta" target="_blank" rel="noreferrer">Vamos conversar <span aria-hidden="true">↗</span></a>
           <a href="#filosofia" className="scroll-cue"><span>ROLE PARA EXPLORAR</span><i aria-hidden="true">↓</i></a>
         </motion.div>
 
@@ -158,7 +159,7 @@ export function Hero() {
           viewport={{ once: true, amount: 0.4 }}
           transition={revealTransition(0.34)}
         >
-          <span>02 / 02</span><span>CONTINUA EM VOCÊ</span>
+          <span>02 — FILOSOFIA</span><span>CONTINUA EM VOCÊ</span>
         </motion.div>
       </section>
     </>
