@@ -230,6 +230,25 @@ body { overflow-x: hidden; }
   .footer-social { grid-column: 2; grid-row: 1; justify-self: end; }
 }
 
+@media (max-width: 430px) {
+  html { scroll-padding-top: 72px; }
+  .page-section { scroll-margin-top: 72px; }
+  .section-container { width: calc(100% - 40px); }
+  .page-section { padding: 72px 0; }
+  .page-section h2 { font-size: clamp(38px, 10.5vw, 48px); }
+  .about-portrait { min-height: 390px; }
+  .comparison-stage { grid-template-columns: 1fr 1fr; min-height: 260px; }
+  .comparison-panel { min-height: 260px; }
+  .comparison-label { left: 10px; bottom: 12px; font-size: 7px; }
+  .treatment-card { flex-basis: 88%; }
+  .treatments-arrow { width: 32px; height: 32px; }
+  .treatments-arrow-previous { left: 4px; }
+  .treatments-arrow-next { right: 4px; }
+  .contact-cta { max-width: 100%; gap: 18px; padding-inline: 14px; font-size: 9px; }
+  .location-caption { gap: 12px; padding-inline: 12px; font-size: 7px; }
+  .footer-legal { gap: 16px; font-size: 7px; }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .mobile-menu-toggle span, .treatment-image img, .comparison-photo, .treatments-arrow, .contact-cta { transition-duration: .01ms !important; }
 }
