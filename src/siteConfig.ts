@@ -28,6 +28,27 @@ export const treatmentOptions = [
     image: '/img/Rituais_pele.jpg',
     details: 'O plano é construído a partir da conversa e da avaliação profissional, considerando suas expectativas e características individuais. As opções e os cuidados são explicados com calma, sem fórmulas prontas.',
   },
+   {
+    number: '04',
+    name: 'Limpeza profunda',
+    description: 'Cuidado de limpeza para remover impurezas e acompanhar as necessidades da sua pele.',
+    image: '/img/manchas e espinhas.jpg',
+    details: 'A limpeza profunda ajuda a higienizar a pele e remover cravos e resíduos acumulados. O procedimento e os cuidados são definidos conforme as características e a sensibilidade da sua pele, após avaliação profissional.',
+  },
+   {
+    number: '05',
+    name: 'Remoção a laser',
+    description: 'Avaliação cuidadosa para entender as possibilidades de remoção a laser para o seu caso.',
+    image: '/img/remocao-laser.jpg',
+    details: 'A indicação da remoção a laser depende do tipo de pigmento, da área tratada e das características da pele. Na avaliação, são explicadas as etapas, os cuidados necessários e as expectativas possíveis para cada caso.',
+  },
+   {
+    number: '06',
+    name: 'Microagulhamento',
+    description: 'Um cuidado que estimula a renovação da pele, sempre com indicação individualizada.',
+    image: '/img/microagulhamento.jpg',
+    details: 'O microagulhamento utiliza pequenas agulhas para criar estímulos controlados na pele. A avaliação profissional define se o procedimento é adequado, como será realizado e quais cuidados são importantes antes e depois.',
+  },
 ];
 
 export function whatsappLink(topic: string) {
