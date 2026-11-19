@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { motion, useReducedMotion } from 'motion/react';
 import { siteConfig, treatmentOptions, whatsappLink } from '../siteConfig';
 import { Reveal } from './Reveal';
@@ -29,7 +29,6 @@ export function AboutSection() {
       <div className="section-container about-layout">
         <Reveal className="about-portrait">
           <img src="/img/Mulher%20Sorridente%20com%20Tatuagens%20e%20Look%20Escuro.png" alt="Retrato da Dra. Bruna Carra" loading="lazy" />
-          <span className="photo-caption">DRA. BRUNA CARRA · BIOMÉDICA</span>
         </Reveal>
         <Reveal className="about-copy" delay={0.12}>
           <span className="section-eyebrow">03 — SOBRE A BRUNA</span>
@@ -58,17 +57,16 @@ export function BeforeAfterSection() {
           </Reveal>
         </div>
         <Reveal className="comparison-stage" delay={0.12} amount={0.1}>
-          <div className="comparison-panel comparison-before">
+          <div className="comparison-panel comparison-before" tabIndex={0}>
             <span className="comparison-label">ANTES</span>
-            <div className="comparison-placeholder"><span>Fotografia<br />autorizada</span></div>
+            <img className="comparison-photo" src="/img/antes.jpeg" alt="Registro do antes" loading="lazy" />
           </div>
-          <div className="comparison-panel comparison-after">
+          <div className="comparison-panel comparison-after" tabIndex={0}>
             <span className="comparison-label">DEPOIS</span>
-            <div className="comparison-placeholder"><span>Fotografia<br />autorizada</span></div>
+            <img className="comparison-photo" src="/img/depois.jpeg" alt="Registro do depois" loading="lazy" />
           </div>
-          <div className="comparison-caption"><span>CASO REAL · COM AUTORIZAÇÃO</span><span>FOTOGRAFIAS EM ATUALIZAÇÃO</span></div>
         </Reveal>
-        <p className="results-note">As imagens e informações de cada caso serão inseridas após aprovação e autorização da paciente.</p>
+        <p className="results-note">Cada resultado é individual. A indicação e o plano de cuidado são definidos após avaliação profissional.</p>
       </div>
     </section>
   );
@@ -76,6 +74,14 @@ export function BeforeAfterSection() {
 
 export function TreatmentsSection() {
   const carouselRef = useRef<HTMLDivElement>(null);
+  const treatmentDialogRef = useRef<HTMLDialogElement>(null);
+  const [selectedTreatment, setSelectedTreatment] = useState<(typeof treatmentOptions)[number] | null>(null);
+
+  useEffect(() => {
+    const dialog = treatmentDialogRef.current;
+    if (selectedTreatment && dialog && !dialog.open) dialog.showModal();
+    if (!selectedTreatment && dialog?.open) dialog.close();
+  }, [selectedTreatment]);
 
   const moveCarousel = (direction: 'previous' | 'next') => {
     const carousel = carouselRef.current;
@@ -99,23 +105,45 @@ export function TreatmentsSection() {
           <div className="treatment-list" ref={carouselRef} aria-label="Tratamentos disponíveis">
             {treatmentOptions.map((treatment, index) => (
               <Reveal className="treatment-card" key={treatment.number} delay={index * 0.08} amount={0.12}>
-                <div className={`treatment-image treatment-image-${index + 1}`}>
-                  <img src="/img/Mulher%20Sorridente%20com%20Tatuagens%20e%20Look%20Escuro.png" alt="Dra. Bruna Carra" loading="lazy" />
-                  <span className="treatment-number">{treatment.number}</span>
-                </div>
-                <div className="treatment-card-copy">
-                  <h3>{treatment.name}</h3>
-                  <p>{treatment.description}</p>
-                  <a className="treatment-link" href={whatsappLink(treatment.name)} target="_blank" rel="noreferrer" aria-label={`Conversar sobre ${treatment.name} pelo WhatsApp`}>
-                    <span>Conversar pelo WhatsApp</span><span aria-hidden="true">↗</span>
-                  </a>
-                </div>
+                <button className="treatment-card-trigger" type="button" onClick={() => setSelectedTreatment(treatment)} aria-label={`Saiba mais sobre ${treatment.name}`}>
+                  <div className={`treatment-image treatment-image-${index + 1}`}>
+                    <img src={treatment.image} alt="" loading="lazy" />
+                    <span className="treatment-number">{treatment.number}</span>
+                  </div>
+                  <div className="treatment-card-copy">
+                    <h3>{treatment.name}</h3>
+                    <p>{treatment.description}</p>
+                    <span className="treatment-more">Saiba mais <span aria-hidden="true">↗</span></span>
+                  </div>
+                </button>
               </Reveal>
             ))}
           </div>
           <button className="treatments-arrow treatments-arrow-next" type="button" onClick={() => moveCarousel('next')} aria-label="Próximo tratamento">›</button>
         </div>
         <p className="treatments-note">Os atendimentos disponíveis serão confirmados pela equipe após a avaliação.</p>
+        <dialog
+          className="treatment-dialog"
+          ref={treatmentDialogRef}
+          aria-labelledby="treatment-dialog-title"
+          onClose={() => setSelectedTreatment(null)}
+          onClick={(event) => { if (event.target === event.currentTarget) treatmentDialogRef.current?.close(); }}
+        >
+          {selectedTreatment && (
+            <div className="treatment-dialog-content">
+              <button className="treatment-dialog-close" type="button" onClick={() => treatmentDialogRef.current?.close()} aria-label="Fechar detalhes">×</button>
+              <img className="treatment-dialog-image" src={selectedTreatment.image} alt="" />
+              <div className="treatment-dialog-copy">
+                <span className="section-eyebrow">TRATAMENTO · {selectedTreatment.number}</span>
+                <h3 id="treatment-dialog-title">{selectedTreatment.name}</h3>
+                <p>{selectedTreatment.details}</p>
+                <a className="treatment-dialog-cta" href={whatsappLink(selectedTreatment.name)} target="_blank" rel="noreferrer">
+                  Conversar pelo WhatsApp <span aria-hidden="true">↗</span>
+                </a>
+              </div>
+            </div>
+          )}
+        </dialog>
       </div>
     </section>
   );
