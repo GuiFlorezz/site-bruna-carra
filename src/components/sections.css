@@ -159,14 +159,11 @@ body { overflow-x: hidden; }
 .contact-address .text-link { border-color: #bdd2c3; color: #e1ede4; }
 .location-card { overflow: hidden; background: rgba(248, 246, 242, .07); }
 .location-art { position: relative; display: grid; min-height: 410px; overflow: hidden; place-items: center; background: #e4ebe5; }
-.map-grid { position: absolute; display: block; width: 135%; height: 1px; background: rgba(36, 33, 31, .16); transform: rotate(-27deg); }
-.map-grid-one { top: 38%; }
-.map-grid-two { top: 65%; transform: rotate(25deg); }
-.location-art::before, .location-art::after { position: absolute; width: 70%; height: 1px; background: rgba(36, 33, 31, .13); content: ''; transform: rotate(68deg); }
-.location-art::after { transform: rotate(-65deg); }
-.map-pin { position: relative; z-index: 1; display: grid; width: 54px; height: 54px; place-items: center; border: 1px solid var(--green); border-radius: 50% 50% 50% 2px; background: var(--page-paper); transform: rotate(-45deg); }
-.map-pin span { width: 10px; height: 10px; border-radius: 50%; background: var(--green); }
-.map-caption { position: absolute; right: 18px; bottom: 18px; color: var(--ink); font-size: 8px; letter-spacing: .15em; }
+.location-art.has-google-map { display: block; padding: 0; }
+.google-map { display: block; width: 100%; height: 410px; border: 0; }
+.location-placeholder { display: grid; width: min(360px, 82%); justify-items: center; gap: 16px; color: var(--page-dark); text-align: center; }
+.location-placeholder-mark { display: grid; width: 52px; height: 52px; place-items: center; border: 1px solid rgba(36, 107, 69, .5); border-radius: 50%; color: var(--green); font-size: 28px; }
+.location-placeholder p { margin: 0; color: #52665a; font-size: 12px; line-height: 1.8; }
 .location-caption { display: flex; justify-content: space-between; padding: 17px 18px; color: rgba(248, 246, 242, .82); font-size: 8px; letter-spacing: .14em; }
 
 .site-footer { padding: 60px 0 22px; background: #142f23; color: var(--page-paper); }
@@ -225,6 +222,7 @@ body { overflow-x: hidden; }
   .faq-item details summary { min-height: 72px; font-size: 16px; }
   .contact-layout { grid-template-columns: 1fr; gap: 46px; }
   .location-art { min-height: 320px; }
+  .google-map { height: 320px; min-height: 320px; }
   .footer-main { grid-template-columns: 1fr 1fr; gap: 28px 18px; }
   .footer-main nav { grid-column: 1 / -1; grid-row: 2; }
   .footer-social { grid-column: 2; grid-row: 1; justify-self: end; }
