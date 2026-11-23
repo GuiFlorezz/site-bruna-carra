@@ -207,24 +207,34 @@ export function ContactSection() {
           <div className="contact-address">
             <span className="section-eyebrow">ENDEREÇO</span>
             <p>{siteConfig.address || 'Endereço da clínica será adicionado após confirmação.'}</p>
-            {siteConfig.mapsUrl && <a className="text-link" href={siteConfig.mapsUrl} target="_blank" rel="noreferrer">Abrir no mapa <span aria-hidden="true">↗</span></a>}
+            {siteConfig.mapsUrl && <a className="text-link" href={siteConfig.mapsUrl} target="_blank" rel="noreferrer">Ver no Google Maps <span aria-hidden="true">↗</span></a>}
           </div>
         </Reveal>
         <Reveal className="location-card" delay={0.12} amount={0.12}>
           <motion.div
-            className="location-art"
-            initial={reduceMotion ? false : { scale: 0.96, opacity: 0 }}
-            whileInView={{ scale: 1, opacity: 1 }}
+            className={`location-art${siteConfig.mapsEmbedUrl ? ' has-google-map' : ''}`}
+            initial={reduceMotion ? false : { opacity: 0 }}
+            whileInView={{ opacity: 1 }}
             viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: reduceMotion ? 0 : 0.9, ease: [0.22, 1, 0.36, 1] as const }}
-            aria-hidden="true"
+            transition={{ duration: reduceMotion ? 0 : 0.7 }}
           >
-            <span className="map-grid map-grid-one" />
-            <span className="map-grid map-grid-two" />
-            <span className="map-pin"><span /></span>
-            <span className="map-caption">BRUNA CARRA · ATENDIMENTO</span>
+            {siteConfig.mapsEmbedUrl ? (
+              <iframe
+                className="google-map"
+                src={siteConfig.mapsEmbedUrl}
+                title="Localização da clínica no Google Maps"
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                allowFullScreen
+              />
+            ) : (
+              <div className="location-placeholder">
+                <span className="location-placeholder-mark" aria-hidden="true">⌖</span>
+                <p>{siteConfig.address ? `Localização provisória: ${siteConfig.address}. Use o link ao lado para abrir essa região no Google Maps.` : 'O mapa do Google será adicionado quando o endereço da clínica estiver confirmado.'}</p>
+              </div>
+            )}
           </motion.div>
-          <div className="location-caption"><span>LOCALIZAÇÃO</span><span>{siteConfig.address ? 'ABRIR DETALHES' : 'EM ATUALIZAÇÃO'}</span></div>
+          <div className="location-caption"><span>LOCALIZAÇÃO</span><span>{siteConfig.mapsEmbedUrl ? 'GOOGLE MAPS' : siteConfig.address || 'AGUARDANDO ENDEREÇO'}</span></div>
         </Reveal>
       </div>
     </section>

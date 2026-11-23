@@ -1,8 +1,9 @@
 export const siteConfig = {
   // Use apenas dígitos com código do país, por exemplo: 5511999999999.
   whatsappNumber: '5554996453722',
-  address: '',
-  mapsUrl: '',
+  address: 'Feliz, RS',
+  mapsUrl: 'https://www.google.com/maps/search/?api=1&query=Feliz%2C%20RS',
+  mapsEmbedUrl: 'https://maps.google.com/maps?q=Feliz%2C%20RS&output=embed',
   instagramUrl: '',
 };
 
